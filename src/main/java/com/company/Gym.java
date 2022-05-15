@@ -10,6 +10,7 @@ import com.mongodb.client.model.Updates;
 import org.bson.Document;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Scanner;
 // Classes
 class MongoConnection{
@@ -210,17 +211,45 @@ class SwitchStatements{
         }
     }
 }
+class Auth{
+    Scanner sc = new Scanner(System.in);
+    String username,password;
+    public void login(){
+        System.out.println("---------------Admin Login--------------------\n");
+        System.out.print("Enter Your Username: ");
+        username = sc.next();
+        System.out.print("Enter Your Password: ");
+        password = sc.next();
+    }
+    public void displayAdminPanel(){
 
-
-
-public class Gym{
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("------------Welcome To Gym Management System---------------------");
-        while(true) {
+        while(true){
+            System.out.println("\n\n------------Welcome To Gym Management System---------------------");
             Menu menu = new Menu();
             int choice = menu.displayOptions();
             SwitchStatements ss = new SwitchStatements(choice);
         }
+    }
+    public void authorizeAdmin(){
+        if (username.equals("admin") && password.equals("admin")){
+            displayAdminPanel();
+
+        }
+        else{
+            System.out.println("Wrong Credentials !!!\n");
+            System.out.println("Please Login Again !!!\n");
+            login();
+            authorizeAdmin();
+        }
+    }
+}
+
+
+public class Gym {
+    public static void main(String[] args) {
+        Auth authorize = new Auth();
+        authorize.login();
+        authorize.authorizeAdmin();
+
     }
 }
